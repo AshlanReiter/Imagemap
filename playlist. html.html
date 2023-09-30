@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Playlist</title>
+    <style>
+       
+        body {
+            font-family: Arial, sans-serif;
+          margin:0;
+          padding:0;
+            background-image:url('images.jpeg');
+          background-attachment:fixed;
+          background-size:cover;
+          
+        }
+        #playlist {
+            list-style: none;
+            padding: 0;
+        }
+        #playlist li {
+            margin: 10px;
+            padding: 10px;
+            background-color: black;
+            border: 1px solid white;
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+        }
+        #playlist li:hover {
+            background-color: brown;
+        }
+        #playlist li img {
+            max-width: 100px;
+            max-height: 100px;
+            margin-right: 10px;
+        }
+  .haha {
+    background-color:brown;
+    padding:1px;
+  }
+    </style>
+</head>
+<body>
+  <header class="haha">
+    <h1 style="color:white;margin-left:20px;">Sample Music Playlist</h1>
+  </header>
+    <ul id="playlist">
+        <li data-src="music.mp3">
+            <img src="images.jpeg" alt="Song 1 Image" style="height:35px;">
+          <p style="color:white;">La Promesse
+        </li>
+        <li data-src="CLASSMATE_256k.mp3">
+            <img src="images.jpeg" alt="Song 2 Image" style="height:35px;">
+          <p style="color:white;">Classmate
+        </li>
+        <li data-src="audio.m4a">
+            <img src="images.jpeg" alt="Song 3 Image" style="height:35px;">
+          <p style="color:white;">Songstress Aria
+        </li>
+          <li data-src="music.mp3">
+            <img src="images.jpeg" style="height:35px;">
+            <p style="color:white;">La Promesse (2)</p>
+          </li>
+          <li data-src="audio.m4a">
+            <img src="images.jpeg" alt="Song 3 Image" style="height:35px;">
+          <p style="color:white;">Songstress Aria (2)
+        </li>
+              <li data-src="music.mp3">
+            <img src="images.jpeg" style="height:35px;">
+            <p style="color:white;">La Promesse (3)</p>
+          </li>
+            <li data-src="audio.m4a">
+            <img src="images.jpeg" alt="Song 3 Image" style="height:35px;">
+          <p style="color:white;">Songstress Aria (3)
+        </li>
+          <li data-src="CLASSMATE_256k.mp3">
+            <img src="images.jpeg" alt="Song 2 Image" style="height:35px;">
+          <p style="color:white;">Classmate (2)
+        </li>
+    </ul>
+          <center>
+    <audio id="audio" controls style="width:400px;">
+        <source id="audioSource" src="" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+            <a href="default.asp">haha</a>
+    </center>
+            
+    <script>
+        // JavaScript functions
+        const playlistItems = document.querySelectorAll('#playlist li');
+        let currentSongIndex = 0;
+
+        function playMusic(songIndex) {
+            const audioElement = document.getElementById('audio');
+            const audioSourceElement = document.getElementById('audioSource');
+            audioSourceElement.src = playlistItems[songIndex].getAttribute('data-src');
+            audioElement.load();
+            audioElement.play();
+
+            // Update the current song index
+            currentSongIndex = songIndex;
+        }
+
+        function autoPlayNext() {
+            currentSongIndex = (currentSongIndex + 1) % playlistItems.length;
+            playMusic(currentSongIndex);
+        }
+
+        // Add event listeners to playlist items
+        playlistItems.forEach((item, index) => {
+            item.addEventListener('click', () => {
+                playMusic(index);
+            });
+        });
+
+        // Automatically play the next song when the current one ends
+        document.getElementById('audio').addEventListener('ended', () => {
+            autoPlayNext();
+        });
+
+        // Initialize by playing the first song
+        playMusic(currentSongIndex);
+    </script>
+</body>
+</html>
+
+<br>
+<b style="color:white;">Note !!!!!!!!!!!!!</b>
+<p style="color:white;">Make sure to replace "song1.mp3", "song2.mp3", "song3.mp3", "song1.jpg", "song2.jpg", and "song3.jpg" 
+with the actual file paths or URLs to your music files and images.</p>
